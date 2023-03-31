@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineCounter", "LineCheck\LineCounter.csproj", "{0700FBFE-FF59-42C6-889A-B18041527011}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LineCounter", "LineCounter\LineCounter.csproj", "{C41AB40B-D6EF-4A34-9971-3D60AB8E3C89}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0700FBFE-FF59-42C6-889A-B18041527011}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0700FBFE-FF59-42C6-889A-B18041527011}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0700FBFE-FF59-42C6-889A-B18041527011}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0700FBFE-FF59-42C6-889A-B18041527011}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C41AB40B-D6EF-4A34-9971-3D60AB8E3C89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C41AB40B-D6EF-4A34-9971-3D60AB8E3C89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C41AB40B-D6EF-4A34-9971-3D60AB8E3C89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C41AB40B-D6EF-4A34-9971-3D60AB8E3C89}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
