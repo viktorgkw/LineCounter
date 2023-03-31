@@ -1,6 +1,5 @@
 namespace LineCounter
 {
-    using System.Diagnostics;
     using LineCounter.Utilities;
 
     /// <summary>
