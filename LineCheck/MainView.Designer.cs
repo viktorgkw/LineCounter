@@ -28,48 +28,61 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.btnSelect = new System.Windows.Forms.Button();
-            this.lblResult = new System.Windows.Forms.Label();
-            this.SuspendLayout();
+            folderBrowserDialog1 = new FolderBrowserDialog();
+            btnSelect = new Button();
+            lblResult = new Label();
+            checkMarkdown = new CheckBox();
+            SuspendLayout();
             // 
             // btnSelect
             // 
-            this.btnSelect.Font = new System.Drawing.Font("Consolas", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.btnSelect.ForeColor = System.Drawing.Color.MediumOrchid;
-            this.btnSelect.Location = new System.Drawing.Point(140, 200);
-            this.btnSelect.Name = "btnSelect";
-            this.btnSelect.Size = new System.Drawing.Size(230, 50);
-            this.btnSelect.TabIndex = 0;
-            this.btnSelect.Text = "Select Directory";
-            this.btnSelect.UseVisualStyleBackColor = true;
-            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            btnSelect.Font = new Font("Consolas", 15.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnSelect.ForeColor = Color.MediumOrchid;
+            btnSelect.Location = new Point(128, 197);
+            btnSelect.Name = "btnSelect";
+            btnSelect.Size = new Size(240, 50);
+            btnSelect.TabIndex = 0;
+            btnSelect.Text = "Select Directory";
+            btnSelect.UseVisualStyleBackColor = true;
+            btnSelect.Click += btnSelect_Click;
             // 
             // lblResult
             // 
-            this.lblResult.BackColor = System.Drawing.Color.Transparent;
-            this.lblResult.Font = new System.Drawing.Font("Consolas", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblResult.ForeColor = System.Drawing.Color.White;
-            this.lblResult.Location = new System.Drawing.Point(12, 9);
-            this.lblResult.Name = "lblResult";
-            this.lblResult.Size = new System.Drawing.Size(460, 153);
-            this.lblResult.TabIndex = 1;
-            this.lblResult.Text = "Result will be shown here.";
-            this.lblResult.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            lblResult.BackColor = Color.Transparent;
+            lblResult.Font = new Font("Consolas", 18F, FontStyle.Bold, GraphicsUnit.Point);
+            lblResult.ForeColor = Color.White;
+            lblResult.Location = new Point(12, 9);
+            lblResult.Name = "lblResult";
+            lblResult.Size = new Size(460, 114);
+            lblResult.TabIndex = 1;
+            lblResult.Text = "Result will be shown here.";
+            lblResult.TextAlign = ContentAlignment.MiddleCenter;
+            // 
+            // checkMarkdown
+            // 
+            checkMarkdown.BackColor = Color.Transparent;
+            checkMarkdown.Font = new Font("Consolas", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            checkMarkdown.ForeColor = Color.White;
+            checkMarkdown.Location = new Point(128, 126);
+            checkMarkdown.Name = "checkMarkdown";
+            checkMarkdown.Size = new Size(240, 49);
+            checkMarkdown.TabIndex = 2;
+            checkMarkdown.Text = "Include Markdown Files?";
+            checkMarkdown.UseVisualStyleBackColor = false;
             // 
             // MainView
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::LineCheck.Properties.Resources._1;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.ClientSize = new System.Drawing.Size(484, 261);
-            this.Controls.Add(this.lblResult);
-            this.Controls.Add(this.btnSelect);
-            this.Name = "MainView";
-            this.Text = "LineCheck";
-            this.ResumeLayout(false);
-
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = Properties.Resources._1;
+            BackgroundImageLayout = ImageLayout.Stretch;
+            ClientSize = new Size(484, 259);
+            Controls.Add(checkMarkdown);
+            Controls.Add(lblResult);
+            Controls.Add(btnSelect);
+            Name = "MainView";
+            Text = "LineCheck";
+            ResumeLayout(false);
         }
 
         #endregion
@@ -77,5 +90,6 @@
         private FolderBrowserDialog folderBrowserDialog1;
         private Button btnSelect;
         private Label lblResult;
+        private CheckBox checkMarkdown;
     }
 }

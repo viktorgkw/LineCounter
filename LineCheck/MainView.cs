@@ -1,79 +1,138 @@
-using LineCheck.Utilities;
-
 namespace LineCheck
 {
+    using System.Diagnostics;
+    using LineCheck.Utilities;
+
+    /// <summary>
+    /// This is the Main View of the application.
+    /// </summary>
     public partial class MainView : Form
     {
-        public static int LinesOfCode = 0;
+        private static string[] Extensions = null!;
+
         public MainView()
         {
             InitializeComponent();
         }
 
+        /// <summary>
+        /// This method is called when somebody clicks the "Select Directory" button in the Main View.
+        /// </summary>
+        /// <param name="sender">Sender</param>
+        /// <param name="e">Event</param>
         private void btnSelect_Click(object sender, EventArgs e)
         {
-            LinesOfCode = 0;
-            using (var fbd = new FolderBrowserDialog())
+            int LinesCounter = 0;
+
+            Extensions = checkMarkdown.Checked ?
+                CodingFilesExtensions.ExtensionsWithMarkdown :
+                CodingFilesExtensions.ExtensionsWithoutMarkdown;
+
+            using FolderBrowserDialog fbd = new FolderBrowserDialog();
+            DialogResult dialogResult = fbd.ShowDialog();
+
+            if (dialogResult == DialogResult.Cancel)
             {
-                DialogResult dialogResult = fbd.ShowDialog();
-
-                string path = fbd.SelectedPath;
-
-                CalculateLines(path);
+                lblResult.Text = "Result will be shown here.";
+                return;
             }
 
-            lblResult.Text = $"This folder has total lines of code => {LinesOfCode}";
+            string path = fbd.SelectedPath;
+
+            LinesCounter = CalculateLines(path, LinesCounter);
+
+            lblResult.Text = $"This folder has total lines of code => {LinesCounter}";
         }
 
-        private void CalculateLines(string path)
+        /// <summary>
+        /// This method calculates the lines of the selected folder.
+        /// </summary>
+        /// <param name="path">Project Folder Path</param>
+        /// <param name="counter">Lines Counter</param>
+        private static int CalculateLines(string path, int counter)
         {
             var files = Directory.GetFiles(path);
+
             foreach (var file in files)
             {
                 var fileExtension = GetExtension(file);
 
-                if (CodingFilesExtensions.Extensions.Contains(fileExtension))
+                if (Extensions.Contains(fileExtension))
                 {
-                    using (StreamReader sr = new StreamReader(file))
-                    {
-                        LinesOfCode += GetFileLines(sr);
-                    }
+                    using StreamReader sr = new StreamReader(file);
+
+                    counter += GetFileLines(sr);
                 }
             }
 
             var directories = Directory.GetDirectories(path);
+
             foreach (var directory in directories)
             {
                 var directoryName = GetDirectoryName(directory.ToLower());
 
                 if (!InvalidFolderNames.Names.Contains(directoryName))
                 {
-                    CalculateLines(directory);
+                    counter = CalculateLines(directory, counter);
                 }
             }
+
+            return counter;
         }
 
-        private string GetDirectoryName(string directoryPath)
+        /// <summary>
+        /// This method returns the directory name from a given path.
+        /// </summary>
+        /// <param name="directoryPath">The path of the directory</param>
+        /// <returns>String of the directory's name</returns>
+        private static string GetDirectoryName(string directoryPath)
         {
             var nameStartIndex = directoryPath.LastIndexOf("\\") + 1;
 
             return directoryPath.Substring(nameStartIndex);
         }
 
-        private string GetExtension(string fileName)
+        /// <summary>
+        /// This method returns the extension of the given file.
+        /// </summary>
+        /// <param name="fileName">Full File Name</param>
+        /// <returns>String of the file's extension.</returns>
+        private static string GetExtension(string fileName)
         {
             var extensionStartIndex = fileName.LastIndexOf(".");
 
             return fileName.Substring(extensionStartIndex);
         }
 
-        private int GetFileLines(StreamReader sr)
+        /// <summary>
+        /// This method calculates the current file lines from the Stream Reader.
+        /// Keep in mind that the method doesnt count empty lines, comments or usings/imports!
+        /// </summary>
+        /// <param name="sr">Stream Reader</param>
+        /// <returns>Lines of code in the Stream Reader.</returns>
+        private static int GetFileLines(StreamReader sr)
         {
             int counter = 0;
-            string line = sr.ReadLine();
+            string? line = sr.ReadLine();
 
             while (line != null)
             {
+                // Line is null, empty or whitespace.
+                if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line))
+                {
+                    line = sr.ReadLine();
+                    continue;
+                }
+
+                // Starts with invalid line.
+                string lineStart = line.Split(' ').First();
+
+                if (InvalidLines.InvalidLinesArray.Contains(lineStart))
+                {
+                    line = sr.ReadLine();
+                    continue;
+                }
+
                 counter++;
                 line = sr.ReadLine();
             }
