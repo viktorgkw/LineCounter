@@ -10,6 +10,31 @@
         /// </summary>
         public readonly static string[] Names = new string[]
         {
+            // Feel free to make pull requests with names that are'nt here!
+
+            "MigrationBackup",
+            "healthchecksdb",
+            "Release",
+            "release",
+            "BuildLog",
+            "buildlog",
+            "Buildlog",
+            "buildLog",
+            "Log",
+            "log",
+            "Logs",
+            "logs",
+            "Out",
+            "out",
+            "Build",
+            "build",
+            "bld",
+            "Debug",
+            "debug",
+            "dbg",
+            "x64",
+            "x86",
+            "node_modules",
             "resources",
             "properties",
             "bin",

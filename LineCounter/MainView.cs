@@ -112,32 +112,70 @@ namespace LineCounter
         /// <returns>Lines of code in the Stream Reader.</returns>
         private static int GetFileLines(StreamReader sr)
         {
+            bool inComment = false;
             int counter = 0;
             string? line = sr.ReadLine();
 
             while (line != null)
             {
-                // Line is null, empty or whitespace.
-                if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line))
+                if (inComment)
                 {
+                    // If true then leave a comment.
+                    if (EndsComment(line))
+                    {
+                        inComment = false;
+                        line = sr.ReadLine();
+                        continue;
+                    }
+
+                    // If we get here, then the text is just a comment.
                     line = sr.ReadLine();
                     continue;
                 }
-
-                // Starts with invalid line.
-                string lineStart = line.Split(' ').First();
-
-                if (InvalidLines.InvalidLinesArray.Contains(lineStart))
+                else
                 {
-                    line = sr.ReadLine();
-                    continue;
-                }
+                    // Not in comment
+                    string lineStart = line.Split(' ').First();
 
-                counter++;
-                line = sr.ReadLine();
+                    // Line is null, empty or whitespace.
+                    if (string.IsNullOrEmpty(line) || string.IsNullOrWhiteSpace(line))
+                    {
+                        line = sr.ReadLine();
+                        continue;
+                    }
+
+                    // If true then enter a comment.
+                    if (StartsComment(line))
+                    {
+                        // If the comment is closed on the same line just continue.
+                        if (!EndsComment(line))
+                        {
+                            inComment = true;
+                        }
+
+                        line = sr.ReadLine();
+                        continue;
+                    }
+
+                    // Starts with invalid line.
+                    if (InvalidLines.InvalidLinesArray.Contains(lineStart))
+                    {
+                        line = sr.ReadLine();
+                        continue;
+                    }
+
+                    counter++;
+                    line = sr.ReadLine();
+                }
             }
 
             return counter;
         }
+
+        private static bool StartsComment(string line)
+            => line.StartsWith(@"/*") || line.StartsWith("<!--");
+
+        private static bool EndsComment(string line)
+            => line.EndsWith(@"*/") || line.EndsWith("-->");
     }
 }
