@@ -1,7 +1,7 @@
-namespace LineCheck
+namespace LineCounter
 {
     using System.Diagnostics;
-    using LineCheck.Utilities;
+    using LineCounter.Utilities;
 
     /// <summary>
     /// This is the Main View of the application.
@@ -28,7 +28,7 @@ namespace LineCheck
                 CodingFilesExtensions.ExtensionsWithMarkdown :
                 CodingFilesExtensions.ExtensionsWithoutMarkdown;
 
-            using FolderBrowserDialog fbd = new FolderBrowserDialog();
+            using FolderBrowserDialog fbd = new();
             DialogResult dialogResult = fbd.ShowDialog();
 
             if (dialogResult == DialogResult.Cancel)
@@ -59,7 +59,7 @@ namespace LineCheck
 
                 if (Extensions.Contains(fileExtension))
                 {
-                    using StreamReader sr = new StreamReader(file);
+                    using StreamReader sr = new(file);
 
                     counter += GetFileLines(sr);
                 }
@@ -89,7 +89,7 @@ namespace LineCheck
         {
             var nameStartIndex = directoryPath.LastIndexOf("\\") + 1;
 
-            return directoryPath.Substring(nameStartIndex);
+            return directoryPath[nameStartIndex..];
         }
 
         /// <summary>
@@ -101,7 +101,7 @@ namespace LineCheck
         {
             var extensionStartIndex = fileName.LastIndexOf(".");
 
-            return fileName.Substring(extensionStartIndex);
+            return fileName[extensionStartIndex..];
         }
 
         /// <summary>

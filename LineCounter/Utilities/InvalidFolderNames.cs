@@ -1,4 +1,4 @@
-﻿namespace LineCheck.Utilities
+﻿namespace LineCounter.Utilities
 {
     /// <summary>
     /// This is a static class that contains array of invalid folder names.

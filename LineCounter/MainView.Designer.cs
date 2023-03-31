@@ -1,4 +1,4 @@
-﻿namespace LineCheck
+﻿namespace LineCounter
 {
     partial class MainView
     {
@@ -74,14 +74,14 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackgroundImage = Properties.Resources._1;
+            BackgroundImage = LineCounter.Properties.Resources._1;
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(484, 259);
             Controls.Add(checkMarkdown);
             Controls.Add(lblResult);
             Controls.Add(btnSelect);
             Name = "MainView";
-            Text = "LineCheck";
+            Text = "LineCounter";
             ResumeLayout(false);
         }
 
