@@ -1,10 +1,10 @@
 # LineCounter ✅
 
-## Languages & Technologies 💻
-- C#
-
 ## About ℹ️
 **LineCounter** is a windows desktop application that lets you select a folder and counts all the code lines in each subdirectory and each code file.
+
+## Technologies 💻
+- WinForms
 
 ## Presentation
 
@@ -12,5 +12,3 @@
 
 ## Fun facts 🤓
 > #### This app was made because I made a very big project that I wanted to measure the lines of code it has.
-
-## Thanks for checking out the repository! 💚
